@@ -3,6 +3,8 @@
 ## Requirements
 - Java 21+
 - Maven
+- gcc and make (to build trec_eval)
+- `-std=gnu17` is needed with GCC 15 or newer (my machine). Older compilers can use plain `make`.
 
 ## Build
 ```
