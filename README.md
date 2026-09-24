@@ -12,7 +12,9 @@ mvn package
 ```
 
 ## Run
-TODO
+```
+java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Indexer
+```
 
 ## Evaluate
 TODO
