@@ -17,4 +17,7 @@ java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Indexer
 ```
 
 ## Evaluate
-TODO
+```
+grep '^X ' data/QRelsCorrectedforTRECeval
+```
+where X is the id number of the query that is being evaluated
