@@ -15,7 +15,9 @@ mvn package
 ```
 java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Indexer
 ```
-
+```
+java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Searcher
+```
 ## Evaluate
 ```
 grep '^X ' data/QRelsCorrectedforTRECeval
