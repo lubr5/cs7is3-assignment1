@@ -3,6 +3,7 @@ package ie.tcd.brownlu;
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.PrintWriter;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
@@ -21,6 +22,9 @@ public class Searcher {
 	static int queryCount=0; //for numbering the queries to match
 	static QueryParser parser;
 	static IndexSearcher searcher;
+	static String runName="standard_bm25"; //TODO: change this line when I add adaptive analyser/scorer
+	static PrintWriter results;
+	static int maxResults=1000;
 
 	public static void main(String[] args) throws Exception {
 		//point @ index folder & open the index
@@ -33,6 +37,10 @@ public class Searcher {
 
 		Analyzer analyzer=new StandardAnalyzer(); //play around w/ different analysers when testing precision/recall
 		parser=new MultiFieldQueryParser(new String[] {"title","text"},analyzer); //use analyser to put query into lucene-readable format
+
+		//create results file
+		Files.createDirectories(Paths.get("results"));
+		results=new PrintWriter(Files.newBufferedWriter(Paths.get("results/"+runName+".txt"))); //not hard-coded , run setup will change
 
 		//read test questions
 		BufferedReader reader=Files.newBufferedReader(Paths.get("data/cran.qry"));
@@ -63,23 +71,31 @@ public class Searcher {
 		}
 		reader.close();
 		System.out.println("Queries found: "+queryCount);
+		System.out.println("Results written to results/"+runName+".txt");
 		indexReader.close();
 		directory.close();
+		results.close();
 	}
-	//handle the queries and some output tests
+	//handle the queries and output into a results file
 	static void handleQuery(int queryId, String text) throws Exception {
 		Query query=parser.parse(QueryParser.escape(text));
+		//Write all hits for all queries into results file
+		//TODO: allow user to select what maxResults is
+		ScoreDoc[] hits=searcher.search(query,maxResults).scoreDocs;
+		for(int i=0;i<hits.length;i++) {
+			String docId=searcher.storedFields().document(hits[i].doc).get("id");
+			results.println(queryId+" Q0 "+docId+" "+(i+1)+" "+hits[i].score+" "+runName); //written to results, not shell
+		}
+		
+		// Test output on 3 random queries, top 3 hits only
 		if(queryId==1 || queryId==3 || queryId==225) {
 			System.out.println("Query "+queryId+": "+text);
-			System.out.println("Lucene query: "+query); //output lucene-readable query to test which analyser is in use		
-			
-			//top 3 hits
-			ScoreDoc[] hits=searcher.search(query,3).scoreDocs;
-			for(int i=0;i<hits.length;i++) {
+			System.out.println("Lucene query: "+query); //output lucene-readable query to test which analyser is in use
+			for(int i=0;i<3 && i<hits.length;i++) {
 				String docId=searcher.storedFields().document(hits[i].doc).get("id");
-				System.out.println(" Rank "+(i+1)+": doc "+docId+" (score "+hits[i].score+")");
+				System.out.println(" Rank "+(i+1)+": doc "+docId+" (score "+hits[i].score+")"); //write top 3 to shell for testing
+				System.out.println();
 			}
-			System.out.println();
 		}
 	}
 }
