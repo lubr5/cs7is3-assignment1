@@ -14,10 +14,7 @@ mvn package
 
 ## Run
 ```
-java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Indexer
-```
-```
-java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Searcher
+java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Main
 ```
 ## Evaluate (single query)
 ```
