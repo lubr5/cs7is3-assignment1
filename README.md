@@ -1,6 +1,7 @@
 # CS7IS3 Assignment 1: Lucene search engine for the Cranfield collection
 
 ## Requirements
+- Linux terminal (I used WSL through Windows Powershell)
 - Java 21+
 - Maven
 - gcc and make (to build trec_eval)
