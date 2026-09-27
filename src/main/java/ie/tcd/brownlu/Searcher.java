@@ -15,6 +15,8 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
+import org.apache.lucene.search.similarities.BooleanSimilarity;
 
 
 public class Searcher {
@@ -22,7 +24,9 @@ public class Searcher {
 	static int queryCount=0; //for numbering the queries to match
 	static QueryParser parser;
 	static IndexSearcher searcher;
-	static String runName="standard_bm25"; //TODO: change this line when I add adaptive analyser/scorer
+	//static String runName="standard_bm25"; //TODO: change this line when I add adaptive analyser/scorer
+	//static String runName="standard_vsm";
+	static String runName="standard_boolean";
 	static PrintWriter results;
 	static int maxResults=1000;
 
@@ -32,7 +36,9 @@ public class Searcher {
 		DirectoryReader indexReader=DirectoryReader.open(directory);
 		System.out.println("Documents in index: "+indexReader.numDocs());
 		searcher=new IndexSearcher(indexReader); //run queries against the index
-		searcher.setSimilarity(new BM25Similarity());		//scoring model. play around with this later
+		//searcher.setSimilarity(new BM25Similarity());		//scoring model. play around with this later
+		//searcher.setSimilarity(new ClassicSimilarity());
+		searcher.setSimilarity (new BooleanSimilarity());
 
 
 		Analyzer analyzer=new StandardAnalyzer(); //play around w/ different analysers when testing precision/recall
