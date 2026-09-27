@@ -22,7 +22,13 @@ public class Indexer {
 	static IndexWriter writer;
 
 	public static void main(String[] args) throws Exception {
-		Analyzer analyzer=new StandardAnalyzer(); //play around w/ different analysers when testing precision/recall
+		run(new StandardAnalyzer());
+		}
+
+	public static void run(Analyzer analyzer) throws Exception{
+		//reset docCount & empties to 0 in case main does another run
+		documentCount=0;
+		empties=0;
 		Directory directory=FSDirectory.open(Paths.get("index"));
 		IndexWriterConfig config=new IndexWriterConfig(analyzer); //use current analyser. Might make this loop thru different analysers later stage
 		config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);    //fresh index each run

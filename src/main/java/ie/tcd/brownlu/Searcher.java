@@ -17,31 +17,32 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.similarities.BM25Similarity;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.BooleanSimilarity;
-
+import org.apache.lucene.search.similarities.Similarity;
 
 public class Searcher {
 
 	static int queryCount=0; //for numbering the queries to match
 	static QueryParser parser;
 	static IndexSearcher searcher;
-	//static String runName="standard_bm25"; //TODO: change this line when I add adaptive analyser/scorer
-	//static String runName="standard_vsm";
-	static String runName="standard_boolean";
+	static String runName; //set by the run in main e.g. standard_bm25
 	static PrintWriter results;
 	static int maxResults=1000;
+	
 
+	//for testing Searcher on its own. Main.java calls run() directly
 	public static void main(String[] args) throws Exception {
+		run(new StandardAnalyzer(),new BM25Similarity(),"standard_bm25");
+	}
+
+	public static void run(Analyzer analyzer, Similarity similarity, String name) throws Exception {
+		queryCount=0; //reset to 0 in case main does another run
+		runName=name;
 		//point @ index folder & open the index
 		Directory directory=FSDirectory.open(Paths.get("index"));	
 		DirectoryReader indexReader=DirectoryReader.open(directory);
 		System.out.println("Documents in index: "+indexReader.numDocs());
-		searcher=new IndexSearcher(indexReader); //run queries against the index
-		//searcher.setSimilarity(new BM25Similarity());		//scoring model. play around with this later
-		//searcher.setSimilarity(new ClassicSimilarity());
-		searcher.setSimilarity (new BooleanSimilarity());
-
-
-		Analyzer analyzer=new StandardAnalyzer(); //play around w/ different analysers when testing precision/recall
+		searcher=new IndexSearcher(indexReader); //run queries against the index;
+		searcher.setSimilarity(similarity);	//scoring model passed from main
 		parser=new MultiFieldQueryParser(new String[] {"title","text"},analyzer); //use analyser to put query into lucene-readable format
 
 		//create results file
@@ -51,7 +52,6 @@ public class Searcher {
 		//read test questions
 		BufferedReader reader=Files.newBufferedReader(Paths.get("data/cran.qry"));
 		
-
 		String section="";
 		StringBuilder text=new StringBuilder();
 
