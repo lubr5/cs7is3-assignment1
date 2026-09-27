@@ -20,9 +20,9 @@ java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Main
 ```
 grep '^X ' data/QRelsCorrectedforTRECeval
 ```
-where X is the id number of the query that is being shown
-output read as: queryNumber, 0, relevantDocument, relevanceScore
-1, 0, 184, 3
+where X is the id number of the query that is being shown<br>
+output read as: queryNumber, 0, relevantDocument, relevanceScore<br>
+1, 0, 184, 3<br>
 Query 1 was relevant to Document 184, with a high relevance (3)
 ## Evaluate (results file - analyser & scorer must be known)
 ```
