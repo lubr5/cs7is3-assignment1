@@ -83,7 +83,9 @@ public class Main {
 				String choice=input.nextLine().trim();
 
 				if(choice.equals("1")) {
-					similarity=new BM25Similarity();
+					//float k1 =  1.8f;
+					//float b = 0.9f;	changed parameters as a test
+					similarity=new BM25Similarity(); //k1,b);
 					scorerName="bm25";
 					break;
 				}
