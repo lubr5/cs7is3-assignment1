@@ -78,6 +78,7 @@ public class Searcher {
 		reader.close();
 		System.out.println("Queries found: "+queryCount);
 		System.out.println("Results written to results/"+runName+".txt");
+		System.out.println("-- NB: Remember the above file name when evaluating --");
 		indexReader.close();
 		directory.close();
 		results.close();

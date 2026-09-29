@@ -14,16 +14,16 @@ mvn package
 
 ## Run
 ```
-java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Indexer
+java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Main
 ```
-```
-java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Searcher
-```
-## Evaluate (single query)
+## View answer key for a single query
 ```
 grep '^X ' data/QRelsCorrectedforTRECeval
 ```
-where X is the id number of the query that is being evaluated
+where X is the id number of the query that is being shown<br>
+output read as: queryNumber, 0, relevantDocument, relevanceScore<br>
+1, 0, 184, 3<br>
+Query 1 was relevant to Document 184, with a high relevance (3)
 ## Evaluate (results file - analyser & scorer must be known)
 ```
 trec_eval-9.0.7/trec_eval -m map -m recall.1000,10 -m P.10 data/QRelsCorrectedforTRECeval results/standard_bm25.txt
