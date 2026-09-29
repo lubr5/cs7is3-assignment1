@@ -131,7 +131,7 @@ public class Main {
 					Searcher.run(analyzer,similarity,runName);
 				}
 				else if(choice.equals("2")) {
-					System.out.println("TODO");
+					Searcher.interactive(analyzer,similarity,input);
 				}
 				else if(choice.equals("3")) {
 					break; //back to choosing analyser & scorer
