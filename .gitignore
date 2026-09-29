@@ -10,3 +10,4 @@ trec_eval*/
 .vscode/
 *.iml
 dependency-reduced-pom.xml
+*.swp
