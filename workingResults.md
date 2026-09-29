@@ -41,10 +41,11 @@
 |Whitespace| BM25 (K1 = 1.8, b = 0.9)  | title + text | 0.3598 | 0.2742 | 0.7052     | 0.9532      | 2026-09-29 |
 |----------|---------------------------|--------------|--------|--------|------------|-------------|------------|
 
-<p>Similar tweaks were made for (k1 = default, b = 0.9) & (k1 = 1.8, b = default), no noticable difference in any score was found</p>
+Similar tweaks were made for (k1 = default, b = 0.9) & (k1 = 1.8, b = default), no noticable difference in any score was found
 
 ## Tweak 3 - Text-Only Field 
-<p>BM25 parameters were set back to defaults for consistency</p>
+BM25 parameters were set back to defaults for consistency
+
 | Analyzer | Scorer |Fields| MAP    | P@10   | Recall@100 | Recall@1000 | Date       |
 |----------|--------|------|--------|--------|------------|-------------|------------|
 | Standard | BM25   | text | 0.3845 | 0.2867 | 0.7239     | 0.9631      | 2026-09-29 |
@@ -65,3 +66,5 @@
 |----------|--------|------|--------|--------|------------|-------------|------------|
 |Whitespace| Boolean| text | 0.1998 | 0.1680 | 0.5303     | 0.9410      | 2026-09-29 |
 |----------|--------|------|--------|--------|------------|-------------|------------|
+
+## Tweak 4 - Removing more common English words with a custom analyser

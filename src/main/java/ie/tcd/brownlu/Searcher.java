@@ -45,11 +45,11 @@ public class Searcher {
 		System.out.println("Documents in index: "+indexReader.numDocs());
 		searcher=new IndexSearcher(indexReader); //run queries against the index;
 		searcher.setSimilarity(similarity);	//scoring model passed from main
-		parser=new MultiFieldQueryParser(new String[] {"text"},analyzer); //use analyser to put query into lucene-readable format
+		parser=new MultiFieldQueryParser(new String[] {"title","text"},analyzer); //use analyser to put query into lucene-readable format
 
 		//create results file
 		Files.createDirectories(Paths.get("results"));
-		results=new PrintWriter(Files.newBufferedWriter(Paths.get("results/"+runName+"_textOnly.txt"))); //not hard-coded , run setup will change
+		results=new PrintWriter(Files.newBufferedWriter(Paths.get("results/"+runName+".txt"))); //not hard-coded , run setup will change
 
 		//read test questions
 		BufferedReader reader=Files.newBufferedReader(Paths.get("data/cran.qry"));
@@ -79,7 +79,7 @@ public class Searcher {
 		}
 		reader.close();
 		System.out.println("Queries found: "+queryCount);
-		System.out.println("Results written to results/"+runName+"_textOnly.txt");
+		System.out.println("Results written to results/"+runName+".txt");
 		System.out.println("-- NB: Remember the above file name when evaluating --");
 		indexReader.close();
 		directory.close();
