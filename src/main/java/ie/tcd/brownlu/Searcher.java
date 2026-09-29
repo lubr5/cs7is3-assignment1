@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.PrintWriter;
+import java.util.Scanner;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
@@ -104,5 +106,38 @@ public class Searcher {
 				System.out.println();
 			}
 		}
+	}
+	//interactive search: user types their own queries, sees the top 10
+	public static void interactive(Analyzer analyzer, Similarity similarity, Scanner input) throws Exception {
+		Directory directory=FSDirectory.open(Paths.get("index"));
+		DirectoryReader indexReader=DirectoryReader.open(directory);
+		searcher=new IndexSearcher(indexReader);
+		searcher.setSimilarity(similarity);
+		parser=new MultiFieldQueryParser(new String[] {"title","text"},analyzer);
+
+		while(true) {
+			System.out.println();
+			System.out.print("Enter a query (\\q to quit): ");
+			String text=input.nextLine().trim();
+			if(text.equals("\\q")) {
+				break;
+			}
+			if(text.isEmpty()) {
+				continue;
+			}
+
+			Query query=parser.parse(QueryParser.escape(text));
+			ScoreDoc[] hits=searcher.search(query,10).scoreDocs;
+			System.out.println("Lucene query: "+query);
+			if(hits.length==0) {
+				System.out.println("No results.");
+			}
+			for(int i=0;i<hits.length;i++) {
+				Document doc=searcher.storedFields().document(hits[i].doc);
+				System.out.println(" Rank "+(i+1)+": doc "+doc.get("id")+" (score "+hits[i].score+") "+doc.get("title"));
+			}
+		}
+		indexReader.close();
+		directory.close();
 	}
 }
