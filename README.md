@@ -26,7 +26,7 @@ output read as: queryNumber, 0, relevantDocument, relevanceScore<br>
 Query 1 was relevant to Document 184, with a high relevance (3)
 ## Evaluate (results file - analyser & scorer must be known)
 ```
-trec_eval-9.0.7/trec_eval -m map -m recall.1000,10 -m P.10 data/QRelsCorrectedforTRECeval results/standard_bm25.txt
+trec_eval-9.0.7/trec_eval -m map -m recall.1000,100 -m P.10 data/QRelsCorrectedforTRECeval results/standard_bm25.txt
 ```
 
 TODO: add evaluation for the dynamic analyser/scorer functionality that I intend to add
