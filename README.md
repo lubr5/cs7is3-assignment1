@@ -26,12 +26,16 @@ mvn package
 ```
 java -cp target/assignment1-1.0.jar ie.tcd.brownlu.Main
 ```
+## trec_eval quicktest (with consideration of my GCC version)
+```
+cd trec_eval-9.0.7 && make CC="gcc -std=gnu17" quicktest; cd ..
+```
 
 ## Evaluate
 Each run of the Cranfield queries writes `results/<analyser>_<scorer>.txt`, e.g. `results/custom_bm25.txt`.
 To list all results files: `ls results/`
 ```
-trec_eval-9.0.7/trec_eval -m map -m recall.1000,100 -m P.10 data/QRelsCorrectedforTRECeval results/custom_bm25.txt
+trec_eval-9.0.7/trec_eval -m map -m recall.1000,100 -m P.5,10 data/QRelsCorrectedforTRECeval results/custom_bm25.txt
 ```
 Replace `custom_bm25.txt` with the file you want to evaluate.
 
