@@ -62,10 +62,10 @@ public class Main {
 				}
 				else if(choice.equals("5")) {
 					System.out.println();
-					System.out.println("Standard:   splits text into words, removes punctuation, lowercases.Keeps common words (the, of, what)");
-					System.out.println("English:    Standard, plus removes common English word and cuts words to their root");
-					System.out.println("Whitespace: splits only at spaces. Keeps punctuation and capitals");
-					System.out.println("Custom:	English, but cuts a larger number of common words");
+					System.out.println("Standard:      splits text into words, removes punctuation, lowercases.Keeps common words (the, of, what)");
+					System.out.println("English:       standard, plus removes common English word and cuts words to their root");
+					System.out.println("Whitespace:    splits only at spaces. Keeps punctuation and capitals");
+					System.out.println("Custom:	   English, but cuts a larger number of common words");
 					System.out.println();
 				}
 				else if(choice.equals("0")) {
@@ -129,7 +129,7 @@ public class Main {
 				System.out.println();
 				System.out.println("-- CURRENT SETUP: "+analyzerName+", "+scorerName+" --");
 				System.out.println("  1 = Run Cranfield queries");
-				System.out.println("  2 = Interactive search TODO");
+				System.out.println("  2 = Interactive search");
 				System.out.println("  3 = Change analyser/scorer");
 				System.out.println("  0 = Exit");
 				System.out.print("> ");
