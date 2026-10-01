@@ -46,7 +46,6 @@ Similar tweaks were made for (k1 = default, b = 0.9) & (k1 = 1.8, b = default), 
 ## Tweak 3 - Text-Only Field 
 BM25 parameters were set back to defaults for consistency
 
-2373
 | Analyzer | Scorer |Fields| MAP    |  P@5   | P@10   | Recall@100 | Recall@1000 | Date       |
 |----------|--------|------|--------|--------|--------|------------|-------------|------------|
 | Standard | BM25   | text | 0.3845 | 0.4222 | 0.2867 | 0.7239     | 0.9631      | 2026-09-29 |
