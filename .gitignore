@@ -1,7 +1,6 @@
 # Build output and generated files (can be recreated)
 target/
 index/
-results/
 trec_eval*/
 *.tar.gz
 

@@ -90,8 +90,8 @@ public class Main {
 
 				if(choice.equals("1")) {
 					//float k1 =  1.8f;
-					//float b = 0.75f;	//changed parameters as a test
-					similarity=new BM25Similarity(); //k1,b);
+					//float b = 0.9f;	//changed parameters as a test
+					similarity=new BM25Similarity();//k1,b);
 					scorerName="bm25";
 					break;
 				}
